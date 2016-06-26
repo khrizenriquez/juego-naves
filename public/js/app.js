@@ -6,7 +6,8 @@ var display, input, frames, speedFrame,
 
 function main () {
 	//	Game canvas
-	display 	= new Screen(504, 600)
+	display 	= new Screen(800, 600)
+	input 		= new InputHandler()
 	heroData 	= new Hero()
 	display.drawBackground(1)
 
@@ -33,11 +34,30 @@ function run () {
 	let loop = function () {
 		update()
 		render()
+
+		window.requestAnimationFrame(loop, display.canvas)
 	}
 	window.requestAnimationFrame(loop, display.canvas)
 }
 function update () {
 	console.log('Update')
+	//frames++
+
+	// update tank position depending on pressed keys
+	if (input.isDown(37)) { // Left
+		hero.x -= 4;
+		console.log('left')
+	}
+	if (input.isDown(39)) { // Right
+		hero.x += 4;
+		console.log('right')
+	}
+
+	// append new bullet to the bullet array if spacebar is
+	// pressed
+	if (input.isPressed(32)) { // Space
+		//bullets.push(new Bullet(tank.x + 10, tank.y, -8, 2, 6, "#fff"));
+	}
 
 	//	Keep the hero inside of the canvas
 	hero.x = Math.max(Math.min(hero.x, display.width - (30 + heroData.w)), 30)
@@ -45,14 +65,14 @@ function update () {
 function render () {
 	console.log('Render')
 	//	Clear game canvas
-	display.clear()
+	//display.clear()
+	display.drawBackground(1)
 
 	//	Draw badass
 
 	display.ctx.restore()
 
 	//	Draw hero sprite
-	console.log(hero.sprite)
 	display.drawSprite(hero.sprite, hero.x, hero.y)
 }
 

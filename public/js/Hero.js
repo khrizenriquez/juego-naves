@@ -6,4 +6,5 @@ var Hero = function () {
 	this.y 		= 0
 	this.w 		= 62
 	this.h 		= 62
+	this.power  = 10
 }
