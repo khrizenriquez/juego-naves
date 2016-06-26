@@ -30,6 +30,16 @@ Screen.prototype.drawSprite = function(sp, x, y) {
 	img.onload = function () {
 		ctx.drawImage(this, sp.x, sp.y, sp.w, sp.h, x, y, sp.w, sp.h)
 	}
+}
+
+/**
+ * Draw a bullet instance to the canvas
+ * @param  {Bullet} bullet the bullet to draw
+ */
+Screen.prototype.drawBullet = function(bullet) {
+	// set the current fillstyle and draw bullet
+	this.ctx.fillStyle = bullet.color
+	this.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height)
 };
 
 Screen.prototype.drawBackground = function (level) {
