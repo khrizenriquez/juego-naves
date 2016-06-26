@@ -24,7 +24,12 @@ Screen.prototype.clear = function () {
 * @param  {number} y  y-coordinate to draw sprite
 */
 Screen.prototype.drawSprite = function(sp, x, y) {
-	this.ctx.drawImage(sp.img, sp.x, sp.y, sp.w, sp.h, x, y, sp.w, sp.h);
+	let img = new Image()
+	img.src = sp.img
+	let ctx = this.ctx
+	img.onload = function () {
+		ctx.drawImage(this, sp.x, sp.y, sp.w, sp.h, x, y, sp.w, sp.h)
+	}
 };
 
 Screen.prototype.drawBackground = function (level) {
@@ -33,13 +38,12 @@ Screen.prototype.drawBackground = function (level) {
 	let arrBackgrounds 	= ['img/stage/stage1.jpg', 'img/stage/stage2.jpg', 'img/stage/stage3.jpg', 
 							'img/stage/stage4.jpg', 'img/stage/stage5.jpg', 'img/stage/stage6.jpg']
 	let imageNumber = level - 1
-	if (level === 1) {
-		var img = new Image()
-		img.src = route + arrBackgrounds[imageNumber]
-		img.onload = function () {
-			console.log(img)
-			ctx.drawImage(img, 0, 0)
-		}
+	
+	var img = new Image()
+	img.src = route + arrBackgrounds[imageNumber]
+	img.onload = function () {
+		console.log(img)
+		ctx.drawImage(img, 0, 0)
 	}
 }
 
