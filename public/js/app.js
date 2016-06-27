@@ -10,7 +10,7 @@ function main () {
 	//display 	= new Screen(window.innerWidth, window.innerHeight)
 	input 		= new InputHandler()
 	heroData 	= new Hero()
-	display.drawBackground(heroData.level)
+	display.drawBackground(heroData.getLevel())
 
 	init()
 	run()
@@ -85,12 +85,12 @@ function update () {
 function render () {
 	//	Clear game canvas
 	//display.clear()
-	display.drawBackground(heroData.level)
+	display.drawBackground(heroData.getLevel())
 
-	display.drawScore(heroData.score, display.width)
-	display.drawLevel(heroData.level, display.width)
+	display.drawScore(heroData.getScore(), display.width)
+	display.drawLevel(heroData.getLevel(), display.width)
 
-	display.drawLifes(heroData.lifes)
+	display.drawLifes(heroData.getLife())
 
 	//	Draw badass
 
