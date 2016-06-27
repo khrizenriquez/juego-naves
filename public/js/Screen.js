@@ -24,9 +24,10 @@ Screen.prototype.clear = function () {
 * @param  {number} y  y-coordinate to draw sprite
 */
 Screen.prototype.drawSprite = function(sp, x, y) {
-	let img = new Image()
+	let img = new Image(), 
+		ctx = this.ctx
+
 	img.src = sp.img
-	let ctx = this.ctx
 	img.onload = function () {
 		ctx.drawImage(this, sp.x, sp.y, sp.w, sp.h, x, y, sp.w, sp.h)
 	}
@@ -63,6 +64,23 @@ Screen.prototype.drawLevel = function (level, xPos) {
 	context.font = "16px arial";
   	context.fillText(`Nivel: ${l}`, (xPos - 100), 30);
 }
+
+Screen.prototype.drawLifes = function(userLifes) {
+	let l 		= userLifes, 
+		ctx 	= this.ctx, 
+		img 	= new Image(),
+		hero  	= new Hero()
+	if (isNaN(l)) l = 0
+
+	img.src = hero.imgTransp
+	img.onload = function () {
+		let i = 0
+		for (i; i < l; i++) {
+			//ctx.drawImage(this, sp.x, sp.y, sp.w, sp.h, x, y, 20, 20)
+			ctx.drawImage(this, (10 + (i * 25)), 10, (hero.w / 3), (hero.h / 2))
+		}
+	}
+};
 
 Screen.prototype.drawBackground = function (level) {
 	let ctx 			= this.ctx, 

@@ -4,19 +4,13 @@ var display, input, frames, speedFrame,
 	lvFrame, alSprite, heroData, ciSprite, 
 	aliens, dir, hero, bullets, cities;
 
-var gameInfo = {
-	level: 1, 
-	userName: '', 
-	score: 0
-}
-
 function main () {
 	//	Game canvas
 	display 	= new Screen(800, 600)
 	//display 	= new Screen(window.innerWidth, window.innerHeight)
 	input 		= new InputHandler()
 	heroData 	= new Hero()
-	display.drawBackground(gameInfo.level)
+	display.drawBackground(heroData.level)
 
 	init()
 	run()
@@ -91,10 +85,12 @@ function update () {
 function render () {
 	//	Clear game canvas
 	//display.clear()
-	display.drawBackground(gameInfo.level)
+	display.drawBackground(heroData.level)
 
-	display.drawScore(gameInfo.score, display.width)
-	display.drawLevel(gameInfo.level, display.width)
+	display.drawScore(heroData.score, display.width)
+	display.drawLevel(heroData.level, display.width)
+
+	display.drawLifes(heroData.lifes)
 
 	//	Draw badass
 
