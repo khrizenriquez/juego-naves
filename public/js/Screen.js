@@ -52,7 +52,7 @@ Screen.prototype.drawScore = function (score, xPos) {
 	if (isNaN(s)) s = 0
 
 	context.font = "16px arial";
-  	context.fillText(`Puntaje: ${s}`, (xPos - 200), 30);
+  	context.fillText(`Puntaje: ${s}`, (xPos - 150), 30);
 }
 
 Screen.prototype.drawLevel = function (level, xPos) {
@@ -62,7 +62,7 @@ Screen.prototype.drawLevel = function (level, xPos) {
 	if (isNaN(l)) l = 0
 
 	context.font = "16px arial";
-  	context.fillText(`Nivel: ${l}`, (xPos - 100), 30);
+  	context.fillText(`Nivel: ${l}`, (xPos - 250), 30);
 }
 
 Screen.prototype.drawLifes = function(userLifes) {
@@ -97,5 +97,19 @@ Screen.prototype.drawBackground = function (level) {
 	img.src = route + arrBackgrounds[imageNumber]
 	img.onload = function () {
 		ctx.drawImage(img, 0, 0)
+	}
+}
+
+Screen.prototype.drawBadass = function(level) {
+	let img = new Image(), 
+		ctx = this.ctx,  
+		l 	= level || 1
+
+	if (isNaN(l)) l = 1
+
+	let bad = new Badass(l)
+	img.src = bad.getImg()
+	img.onload = function () {
+		ctx.drawImage(this, 100, 100, 30, 30)
 	}
 }
