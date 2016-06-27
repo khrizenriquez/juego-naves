@@ -11,7 +11,7 @@ var Hero = function () {
 	this.w 			= 62
 	this.h 			= 62
 	this.power  	= 10
-	this.lifes 		= 3
+	this.life 		= 3
 	this.level  	= 1
 	this.userName 	= ''
 	this.score 		= 0
@@ -23,15 +23,15 @@ var Hero = function () {
  * @param {number} life     hero life
  */
 Hero.prototype.getLife = function () {
-	return this.lifes
+	return this.life
 };
 
 Hero.prototype.setLife = function (life) {
-	this.lifes = life || 0
+	this.life = life || 0
 };
 
 Hero.prototype.addLife = function () {
-	this.lifes++
+	this.life++
 };
 
 /**
@@ -45,7 +45,7 @@ Hero.prototype.getScore = function () {
 };
 
 Hero.prototype.setScore = function (score) {
-	this.lifes = score || 0
+	this.score = score || 0
 };
 
 /**

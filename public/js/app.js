@@ -96,6 +96,9 @@ function update () {
 				bullets.splice(i, 1);
 				i--;
 				len--;
+				//	Increase hero score
+				heroData.setScore(heroData.getScore() + 
+								(heroData.getLevel() * 5))
 				// increase the movement frequence of the badass
 				// when there are less of them
 				/*switch (len2) {
