@@ -40,6 +40,8 @@ Screen.prototype.drawBullet = function(bullet) {
 	// set the current fillstyle and draw bullet
 	this.ctx.fillStyle = bullet.color
 	this.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height)
+
+	//context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
 };
 
 Screen.prototype.drawBackground = function (level) {

@@ -6,7 +6,8 @@ var display, input, frames, speedFrame,
 
 var gameInfo = {
 	level: 1, 
-	userName: ''
+	userName: '', 
+	score: 0
 }
 
 function main () {
