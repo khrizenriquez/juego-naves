@@ -44,6 +44,26 @@ Screen.prototype.drawBullet = function(bullet) {
 	//context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
 };
 
+Screen.prototype.drawScore = function (score, xPos) {
+	let s 		= score, 
+		context = this.ctx
+
+	if (isNaN(s)) s = 0
+
+	context.font = "16px arial";
+  	context.fillText(`Puntaje: ${s}`, (xPos - 200), 30);
+}
+
+Screen.prototype.drawLevel = function (level, xPos) {
+	let l 		= level, 
+		context = this.ctx
+
+	if (isNaN(l)) l = 0
+
+	context.font = "16px arial";
+  	context.fillText(`Nivel: ${l}`, (xPos - 100), 30);
+}
+
 Screen.prototype.drawBackground = function (level) {
 	let ctx 			= this.ctx
 	let route 			= window.location.href

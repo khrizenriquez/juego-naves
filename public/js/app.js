@@ -95,6 +95,9 @@ function render () {
 	//display.clear()
 	display.drawBackground(gameInfo.level)
 
+	display.drawScore(gameInfo.score, display.width)
+	display.drawLevel(gameInfo.level, display.width)
+
 	//	Draw badass
 
 	//	Bullets
