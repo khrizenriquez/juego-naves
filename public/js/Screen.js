@@ -45,24 +45,11 @@ Screen.prototype.drawBullet = function(bullet) {
 	//context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
 };
 
-Screen.prototype.drawScore = function (score, xPos) {
-	let s 		= score, 
-		context = this.ctx
-
-	if (isNaN(s)) s = 0
+Screen.prototype.drawText = function (text, xPos) {
+	let context = this.ctx
 
 	context.font = "16px arial";
-  	context.fillText(`Puntaje: ${s}`, (xPos - 150), 30);
-}
-
-Screen.prototype.drawLevel = function (level, xPos) {
-	let l 		= level, 
-		context = this.ctx
-
-	if (isNaN(l)) l = 0
-
-	context.font = "16px arial";
-  	context.fillText(`Nivel: ${l}`, (xPos - 250), 30);
+  	context.fillText(`${text}`, (xPos - 150), 30);
 }
 
 Screen.prototype.drawLifes = function(userLifes) {
@@ -100,16 +87,13 @@ Screen.prototype.drawBackground = function (level) {
 	}
 }
 
-Screen.prototype.drawBadass = function(level) {
+Screen.prototype.drawBadass = function(badass) {
 	let img = new Image(), 
-		ctx = this.ctx,  
-		l 	= level || 1
+		ctx = this.ctx
 
-	if (isNaN(l)) l = 1
-
-	let bad = new Badass(l)
-	img.src = bad.getImg()
+	img.src = badass.getImg()
 	img.onload = function () {
-		ctx.drawImage(this, 100, 100, 30, 30)
+		let random = new Handler().getRandom(10, 30)
+		ctx.drawImage(this, badass.x, badass.y, badass.w, badass.h)
 	}
 }

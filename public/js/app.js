@@ -2,7 +2,7 @@
 
 var display, input, frames, speedFrame, 
 	lvFrame, alSprite, heroData, ciSprite, 
-	aliens, dir, hero, bullets, cities;
+	badass, dir, hero, bullets, cities;
 
 function main () {
 	//	Game canvas
@@ -11,6 +11,12 @@ function main () {
 	input 		= new InputHandler()
 	heroData 	= new Hero()
 	display.drawBackground(heroData.getLevel())
+
+	hero = {
+		sprite: heroData, 
+		x: (display.width - heroData.w) / 2,
+		y: display.height - (30 + heroData.h)
+	}
 
 	init()
 	run()
@@ -22,14 +28,17 @@ function init () {
 	lvFrame 	= 60
 
 	bullets = []
+	badass 	= []
+
+	console.log(`Nivel ${heroData.getLevel()}`)
+	let badSize = new Handler().getRandom(10, 21)
+	console.log(badSize)
+	let i = 0
+	for (i; i <= badSize; i++) {
+		badass.push(new Badass(heroData.getLevel()))
+	}
 
 	dir = 1
-
-	hero = {
-		sprite: heroData, 
-		x: (display.width - heroData.w) / 2,
-		y: display.height - (30 + heroData.h)
-	}
 }
 function run () {
 	let loop = function () {
@@ -87,12 +96,18 @@ function render () {
 	//display.clear()
 	display.drawBackground(heroData.getLevel())
 
-	display.drawScore(heroData.getScore(), display.width)
-	display.drawLevel(heroData.getLevel(), display.width)
+	//	Level and score text
+	display.drawText(`Nivel: ${heroData.getLevel()}`, (display.width - 200))
+	display.drawText(`Puntaje: ${heroData.getScore()}`, (display.width - 100))
 
+	//	Hero lifes
 	display.drawLifes(heroData.getLife())
 
 	//	Draw badass
+	badass.some(function (element, index, arr) {
+		display.drawBadass(element)
+		//console.log(element)
+	})
 
 	//	Bullets
 	display.ctx.save()
