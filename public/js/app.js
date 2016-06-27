@@ -85,6 +85,39 @@ function update () {
 			bullets.splice(index, 1)
 			index--
 		}
+
+		// check if bullet hit any badass
+		for (var j = 0, len2 = badass.length; j < len2; j++) {
+			var a = badass[j];
+			if (new Handler().AABBIntersect(b.x, b.y, b.width, b.height, a.x, a.y, a.w, a.h)) {
+				badass.splice(j, 1);
+				j--;
+				len2--;
+				bullets.splice(i, 1);
+				i--;
+				len--;
+				// increase the movement frequence of the badass
+				// when there are less of them
+				/*switch (len2) {
+					case 30: {
+						this.lvFrame = 40;
+						break;
+					}
+					case 10: {
+						this.lvFrame = 20;
+						break;
+					}
+					case 5: {
+						this.lvFrame = 15;
+						break;
+					}
+					case 1: {
+						this.lvFrame = 6;
+						break;
+					}
+				}*/
+			}
+		}
 	})
 
 	// update the badass at the current movement frequence
