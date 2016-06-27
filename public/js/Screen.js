@@ -81,4 +81,3 @@ Screen.prototype.drawBackground = function (level) {
 		ctx.drawImage(img, 0, 0)
 	}
 }
-

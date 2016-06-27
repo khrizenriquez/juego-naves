@@ -73,7 +73,6 @@ function update () {
 
 	// update all bullets position and checks
 	//let lenBullets = bullets.length;
-	console.log(bullets.length)
 	bullets.some(function (element, index, arr) {
 		let b = element
 		b.update()
@@ -88,7 +87,8 @@ function update () {
 	})
 
 	//	Keep the hero inside of the canvas
-	hero.x = Math.max(Math.min(hero.x, display.width - (30 + heroData.w)), 30)
+	hero.x = Math.max(Math.min(hero.x, display.width - (10 + heroData.w)), 10)
+	hero.y = Math.max(Math.min(hero.y, display.height - (10 + heroData.h)), 10)
 }
 function render () {
 	//	Clear game canvas
