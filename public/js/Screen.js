@@ -49,7 +49,7 @@ Screen.prototype.drawText = function (text, xPos) {
 	let context = this.ctx
 
 	context.font = "16px arial";
-  	context.fillText(`${text}`, (xPos - 150), 30);
+  	context.fillText(`${text}`, xPos, 30);
 }
 
 Screen.prototype.drawLifes = function(userLifes) {

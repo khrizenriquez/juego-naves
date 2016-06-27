@@ -25,7 +25,7 @@ function init () {
 	//	Start settings
 	frames 		= 0
 	speedFrame 	= 0
-	lvFrame 	= 60
+	lvFrame 	= 20
 
 	bullets = []
 	badass 	= []
@@ -50,7 +50,7 @@ function run () {
 	window.requestAnimationFrame(loop, display.canvas)
 }
 function update () {
-	//frames++
+	frames++
 
 	// update tank position depending on pressed keys
 	if (input.isDown(37)) { // Left
@@ -87,6 +87,54 @@ function update () {
 		}
 	})
 
+	// update the badass at the current movement frequence
+	if (frames % lvFrame === 0) {
+		//spFrame = (spFrame + 1) % 2;
+		let _max = 0, _min = display.width
+		// iterate through badass and update postition
+		for (var i = 0, len = badass.length; i < len; i++) {
+			var a = badass[i];
+			a.x += new Handler().getRandom(20, 30) * dir;
+			// find min/max values of all badass for direction
+			// change test
+			_max = Math.max(_max, a.x + a.w);
+			_min = Math.min(_min, a.x);
+		}
+		// check if badass should move down and change direction
+		if (_max > display.width - 30 || _min < 30) {
+			// mirror direction and update position
+			dir *= -1;
+			for (var i = 0, len = badass.length; i < len; i++) {
+				badass[i].x += new Handler().getRandom(20, 30) * dir;
+				badass[i].y += new Handler().getRandom(0, 30);
+			}
+		}
+	}
+
+	// update the badass at the current movement frequence
+	if (frames % lvFrame === 0) {
+		//spFrame = (spFrame + 1) % 2;
+		let _max = 0, _min = display.width
+		// iterate through badass and update postition
+		badass.some(function (element, index, arr) {
+			var a = element;
+			a.x += new Handler().getRandom(20, 30) * dir;
+			// find min/max values of all badass for direction
+			// change test
+			_max = Math.max(_max, a.x + a.w);
+			_min = Math.min(_min, a.x);
+		})
+		// check if badass should move down and change direction
+		if (_max > display.width - 30 || _min < 30) {
+			// mirror direction and update position
+			dir *= -1;
+			badass.some(function (ele, ind, ar) {
+				ele.x += new Handler().getRandom(20, 30) * dir;
+				ele.y += new Handler().getRandom(0, 30);
+			})
+		}
+	}
+
 	//	Keep the hero inside of the canvas
 	hero.x = Math.max(Math.min(hero.x, display.width - (10 + heroData.w)), 10)
 	hero.y = Math.max(Math.min(hero.y, display.height - (10 + heroData.h)), 10)
@@ -97,8 +145,8 @@ function render () {
 	display.drawBackground(heroData.getLevel())
 
 	//	Level and score text
-	display.drawText(`Nivel: ${heroData.getLevel()}`, (display.width - 200))
-	display.drawText(`Puntaje: ${heroData.getScore()}`, (display.width - 100))
+	display.drawText(`Nivel: ${heroData.getLevel()}`, (display.width - 250))
+	display.drawText(`Puntaje: ${heroData.getScore()}`, (display.width - 150))
 
 	//	Hero lifes
 	display.drawLifes(heroData.getLife())
