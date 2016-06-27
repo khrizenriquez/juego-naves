@@ -66,7 +66,7 @@ function update () {
 	// append new bullet to the bullet array if spacebar is
 	// pressed
 	if (input.isPressed(32)) {
-		let buletColor = "#fff"
+		let buletColor = "#f1c40f"
 
 		bullets.push(new Bullet(hero.x + (hero.sprite.w / 3), hero.y, -8, 6, 6, buletColor));
 	}
@@ -81,8 +81,6 @@ function update () {
 		if (b.y + b.height < 0 || b.y > display.height) {
 			bullets.splice(index, 1)
 			index--
-			//bullets.pop()
-			//continue;
 		}
 	})
 
