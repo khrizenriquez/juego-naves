@@ -65,10 +65,14 @@ Screen.prototype.drawLevel = function (level, xPos) {
 }
 
 Screen.prototype.drawBackground = function (level) {
-	let ctx 			= this.ctx
-	let route 			= window.location.href
-	let arrBackgrounds 	= ['img/stage/stage1.jpg', 'img/stage/stage2.jpg', 'img/stage/stage3.jpg', 
-							'img/stage/stage4.jpg', 'img/stage/stage5.jpg', 'img/stage/stage6.jpg']
+	let ctx 			= this.ctx, 
+		route 			= window.location.href, 
+		arrBackgrounds 	= ['img/stage/stage1.jpg', 'img/stage/stage2.jpg', 'img/stage/stage3.jpg', 
+							'img/stage/stage4.jpg', 'img/stage/stage5.jpg', 'img/stage/stage6.jpg',
+							'img/stage/stage7.jpg', 'img/stage/stage8.jpg', 'img/stage/stage9.jpg'], 
+		maxStages = 9
+
+	if (level > maxStages) gameInfo.level = 1
 	let imageNumber = level - 1
 	
 	var img = new Image()
