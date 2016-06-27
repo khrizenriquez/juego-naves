@@ -52,7 +52,6 @@ Screen.prototype.drawBackground = function (level) {
 	var img = new Image()
 	img.src = route + arrBackgrounds[imageNumber]
 	img.onload = function () {
-		console.log(img)
 		ctx.drawImage(img, 0, 0)
 	}
 }

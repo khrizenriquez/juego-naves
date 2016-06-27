@@ -16,7 +16,6 @@ function main () {
 	run()
 }
 function init () {
-	console.log('Init')
 	//	Start settings
 	frames 		= 0
 	speedFrame 	= 0
@@ -33,7 +32,6 @@ function init () {
 	}
 }
 function run () {
-	console.log('Run')
 	let loop = function () {
 		update()
 		render()
@@ -43,31 +41,50 @@ function run () {
 	window.requestAnimationFrame(loop, display.canvas)
 }
 function update () {
-	console.log('Update')
 	//frames++
 
 	// update tank position depending on pressed keys
 	if (input.isDown(37)) { // Left
 		hero.x -= 4;
-		console.log('left')
+	}
+	if (input.isDown(38)) { // Up
+		hero.y -= 4;
 	}
 	if (input.isDown(39)) { // Right
 		hero.x += 4;
-		console.log('right')
+	}
+	if (input.isDown(40)) { // Down
+		hero.y += 4;
 	}
 
 	// append new bullet to the bullet array if spacebar is
 	// pressed
 	if (input.isPressed(32)) {
 		let buletColor = "#fff"
-		bullets.push(new Bullet(hero.x + 10, hero.y, -8, 2, 6, buletColor));
+
+		bullets.push(new Bullet(hero.x + (hero.sprite.w / 3), hero.y, -8, 6, 6, buletColor));
 	}
+
+	// update all bullets position and checks
+	//let lenBullets = bullets.length;
+	console.log(bullets.length)
+	bullets.some(function (element, index, arr) {
+		let b = element
+		b.update()
+
+		// remove bullets outside of the canvas
+		if (b.y + b.height < 0 || b.y > display.height) {
+			bullets.splice(index, 1)
+			index--
+			//bullets.pop()
+			//continue;
+		}
+	})
 
 	//	Keep the hero inside of the canvas
 	hero.x = Math.max(Math.min(hero.x, display.width - (30 + heroData.w)), 30)
 }
 function render () {
-	console.log('Render')
 	//	Clear game canvas
 	//display.clear()
 	display.drawBackground(1)

@@ -8,10 +8,10 @@ var InputHandler = function () {
 	this.pressed = {};
 	// capture key presses
 	var _this = this;
-	document.addEventListener("keydown", function(evt) {
+	document.addEventListener("keydown", function (evt) {
 		_this.down[evt.keyCode] = true;
 	});
-	document.addEventListener("keyup", function(evt) {
+	document.addEventListener("keyup", function (evt) {
 		delete _this.down[evt.keyCode];
 		delete _this.pressed[evt.keyCode];
 	});
