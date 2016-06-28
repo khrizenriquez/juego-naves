@@ -61,3 +61,7 @@ Hero.prototype.getLevel = function () {
 Hero.prototype.setLevel = function (level) {
 	this.level = level || 1
 };
+
+Hero.prototype.addLevel = function () {
+	this.level++
+};

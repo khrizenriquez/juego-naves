@@ -48,8 +48,8 @@ Screen.prototype.drawBullet = function(bullet) {
 Screen.prototype.drawText = function (text, xPos) {
 	let context = this.ctx
 
-	context.font = "16px arial";
-  	context.fillText(`${text}`, xPos, 30);
+	context.font = "16px arial"
+  	context.fillText(`${text}`, xPos, 30)
 }
 
 Screen.prototype.drawLifes = function(userLifes) {
@@ -67,7 +67,7 @@ Screen.prototype.drawLifes = function(userLifes) {
 			ctx.drawImage(this, (10 + (i * 25)), 10, (hero.w / 3), (hero.h / 2))
 		}
 	}
-};
+}
 
 Screen.prototype.drawBackground = function (level) {
 	let ctx 			= this.ctx, 
@@ -77,7 +77,7 @@ Screen.prototype.drawBackground = function (level) {
 							'img/stage/stage7.jpg', 'img/stage/stage8.jpg', 'img/stage/stage9.jpg'], 
 		maxStages = 9
 
-	if (level > maxStages) gameInfo.level = 1
+	if (level > maxStages) level = 1
 	let imageNumber = level - 1
 	
 	var img = new Image()
@@ -97,3 +97,12 @@ Screen.prototype.drawBadass = function(badass) {
 		ctx.drawImage(this, badass.x, badass.y, badass.w, badass.h)
 	}
 }
+
+Screen.prototype.centerText = function(text, score, level) {
+	let context = this.ctx
+
+	context.font = "28px arial"
+  	context.fillText(`${text}`, 200, 200)
+  	context.fillText(`${score}`, 200, 300)
+  	context.fillText(`${level}`, 200, 400)
+};

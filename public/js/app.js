@@ -2,7 +2,8 @@
 
 var display, input, frames, speedFrame, 
 	lvFrame, alSprite, heroData, ciSprite, 
-	badass, dir, hero, bullets, cities;
+	badass, dir, hero, bullets, cities, animation;
+var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
 
 function main () {
 	//	Game canvas
@@ -19,9 +20,9 @@ function main () {
 	}
 
 	init()
-	run()
 }
-function init () {
+
+var initFunctions = function () {
 	//	Start settings
 	frames 		= 0
 	speedFrame 	= 0
@@ -30,24 +31,39 @@ function init () {
 	bullets = []
 	badass 	= []
 
-	console.log(`Nivel ${heroData.getLevel()}`)
 	let badSize = new Handler().getRandom(10, 21)
-	console.log(badSize)
+
 	let i = 0
-	for (i; i <= badSize; i++) {
-		badass.push(new Badass(heroData.getLevel()))
-	}
+	for (i; i <= badSize; i++) badass.push(new Badass(heroData.getLevel()))
 
 	dir = 1
+
+	//	Start the loop game
+	run()
 }
+
+function init () {
+	window.cancelAnimationFrame(animation)
+	setTimeout(function () {
+		display.centerText(`Bienvenido ${heroData.userName}`, 
+						`Puntaje: ${heroData.getScore()}`, 
+						`Nivel: ${heroData.getLevel()}`)
+
+		setTimeout(function () {
+			initFunctions()
+			infinityLoop()
+		}, 3000)
+	}, 100)
+}
+
 function run () {
 	let loop = function () {
 		update()
 		render()
 
-		window.requestAnimationFrame(loop, display.canvas)
+		animation = window.requestAnimationFrame(loop, display.canvas)
 	}
-	window.requestAnimationFrame(loop, display.canvas)
+	animation = window.requestAnimationFrame(loop, display.canvas)
 }
 function update () {
 	frames++
@@ -187,6 +203,28 @@ function render () {
 	//	Hero lifes
 	display.drawLifes(heroData.getLife())
 
+	//	If the badass are eliminated, restart the badass array
+	/*if (badass.length === 0) {
+		window.cancelAnimationFrame(animation)
+		setTimeout(function () {
+			window.cancelAnimationFrame(animation)
+			animation = null
+			//console.log('Dentro de settimeout')
+			//heroData.addLevel()
+			//init()
+			if (animation === null) {
+				console.log('Es nulo :D')
+				console.log(animation)
+				//heroData.addLevel()
+				//init()
+			}
+			return
+		}, 1000)
+		window.cancelAnimationFrame(animation)
+		//init()
+		return
+	}*/
+
 	//	Draw badass
 	badass.some(function (element, index, arr) {
 		display.drawBadass(element)
@@ -205,6 +243,27 @@ function render () {
 	display.drawSprite(hero.sprite, hero.x, hero.y)
 }
 
+function infinityLoop () {
+	let interval = setInterval(function () {
+		try	{
+			console.log('Ani:' + animation)
+			console.log('Malotes: ' + badass.length)
+			if (badass.length <= 0) {
+				window.cancelAnimationFrame(animation)
+
+				//	Adding hero level
+				heroData.addLevel()
+				init()
+
+				clearInterval(interval)
+			}
+		} catch (exception) {
+
+		}
+	}, 1000)
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 	main()
+	//infinityLoop()
 })
