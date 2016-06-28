@@ -107,9 +107,6 @@ function update () {
 			var a = badass[j];
 			if (new Handler().AABBIntersect(b.x, b.y, b.width, b.height, a.x, a.y, a.w, a.h)) {
 				let remaining = (a.getLife() - heroData.getPower())
-				console.log(a.getLife())
-				console.log(heroData.getPower())
-				console.log(remaining)
 				if (remaining <= 0) {
 					badass.splice(j, 1)
 					j--
@@ -153,33 +150,6 @@ function update () {
 	// update the badass at the current movement frequence
 	if (frames % lvFrame === 0) {
 		//spFrame = (spFrame + 1) % 2;
-		let _max = 0, _min = display.width
-		// iterate through badass and update postition
-		for (var i = 0, len = badass.length; i < len; i++) {
-			var a = badass[i];
-			a.x += new Handler().getRandom(20, 30) * dir;
-			// find min/max values of all badass for direction
-			// change test
-			_max = Math.max(_max, a.x + a.w);
-			_min = Math.min(_min, a.x);
-		}
-		// check if badass should move down and change direction
-		if (_max > display.width - 30 || _min < 30) {
-			// mirror direction and update position
-			dir *= -1;
-			for (var i = 0, len = badass.length; i < len; i++) {
-				badass[i].x += new Handler().getRandom(20, 30) * dir
-				badass[i].y += new Handler().getRandom(0, 30)
-				if (badass[i].y >= (display.height - 50)) {
-					badass[i].y = 10
-				}
-			}
-		}
-	}
-
-	// update the badass at the current movement frequence
-	if (frames % lvFrame === 0) {
-		//spFrame = (spFrame + 1) % 2;
 		let _max = 0, 
 			_min = display.width, 
 			_hMax = display.height
@@ -199,9 +169,17 @@ function update () {
 			badass.some(function (ele, ind, ar) {
 				ele.x += new Handler().getRandom(20, 30) * dir
 				ele.y += new Handler().getRandom(0, 30)
+
+				if (ele.y >= (display.height - 50)) {
+					ele.y = 10
+				}
 			})
 		}
 	}
+
+	badass.some(function (element, index, arr) {
+
+	})
 
 	//	Keep the hero inside of the canvas
 	hero.x = Math.max(Math.min(hero.x, display.width - (10 + heroData.w)), 10)
