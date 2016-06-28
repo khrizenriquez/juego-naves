@@ -151,15 +151,13 @@ function update () {
 	})
 
 	// update the badass at the current movement frequence
-	let xMovement = new Handler().getRandom(20, 30), 
-		yMovement = new Handler().getRandom(0, 30)
 	if (frames % lvFrame === 0) {
 		//spFrame = (spFrame + 1) % 2;
 		let _max = 0, _min = display.width
 		// iterate through badass and update postition
 		for (var i = 0, len = badass.length; i < len; i++) {
 			var a = badass[i];
-			a.x += xMovement * dir;
+			a.x += new Handler().getRandom(20, 30) * dir;
 			// find min/max values of all badass for direction
 			// change test
 			_max = Math.max(_max, a.x + a.w);
@@ -170,8 +168,8 @@ function update () {
 			// mirror direction and update position
 			dir *= -1;
 			for (var i = 0, len = badass.length; i < len; i++) {
-				badass[i].x += xMovement * dir
-				badass[i].y += yMovement
+				badass[i].x += new Handler().getRandom(20, 30) * dir
+				badass[i].y += new Handler().getRandom(0, 30)
 				if (badass[i].y >= (display.height - 50)) {
 					badass[i].y = 10
 				}
@@ -188,7 +186,7 @@ function update () {
 		// iterate through badass and update postition
 		badass.some(function (element, index, arr) {
 			var a = element
-			a.x += xMovement * dir
+			a.x += new Handler().getRandom(20, 30) * dir
 			// find min/max values of all badass for direction
 			// change test
 			_max = Math.max(_max, a.x + a.w)
@@ -199,8 +197,8 @@ function update () {
 			// mirror direction and update position
 			dir *= -1
 			badass.some(function (ele, ind, ar) {
-				ele.x += xMovement * dir
-				ele.y += yMovement
+				ele.x += new Handler().getRandom(20, 30) * dir
+				ele.y += new Handler().getRandom(0, 30)
 			})
 		}
 	}
