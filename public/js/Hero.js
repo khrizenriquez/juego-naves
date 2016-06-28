@@ -6,6 +6,8 @@ var Hero = function () {
 	//	Transparente
 	this.imgTransp 	= window.location.href + 'img/hero/hero-up-transp.png'
 
+	this.gameOver  	= false
+
 	this.x 			= 0
 	this.y 			= 0
 	this.w 			= 62
@@ -46,6 +48,10 @@ Hero.prototype.getScore = function () {
 
 Hero.prototype.setScore = function (score) {
 	this.score = score || 0
+}
+
+Hero.prototype.isGameOver = function() {
+	return this.gameOver
 }
 
 /**

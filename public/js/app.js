@@ -111,38 +111,14 @@ function update () {
 					badass.splice(j, 1)
 					j--
 					len2--
-					bullets.splice(i, 1)
-					i--
-					len--
+					bullets.splice(index, 1)
+					index--
+					//len--
 					//	Increase hero score
-					heroData.setScore(heroData.getScore() + 
-									(heroData.getLevel() * 5))
+					heroData.setScore(heroData.getScore() + (heroData.getLevel() * 5))
 				} else {
 					a.setLife(remaining)
 				}
-				
-				// increase the movement frequence of the badass
-				// when there are less of them
-				/*switch (len2) {
-					case 30: {
-						this.lvFrame = 40;
-						break;
-					}
-					case 10: {
-						this.lvFrame = 20;
-						break;
-					}
-					case 5: {
-						this.lvFrame = 15;
-						break;
-					}
-					case 1: {
-						this.lvFrame = 6;
-						break;
-					}
-				}*/
-
-				//break
 			}
 		}
 	})
@@ -178,7 +154,20 @@ function update () {
 	}
 
 	badass.some(function (element, index, arr) {
-
+		console.log(heroData.getLife())
+		let b = element, 
+			h = hero
+		if (new Handler().AABBIntersect(b.x, 
+										b.y, 
+										b.w, 
+										b.h, 
+										h.x, 
+										h.y, 
+										heroData.w, 
+										heroData.h)) {
+			//heroData.setLife((heroData.getLife() - 1))
+			heroData.gameOver = true
+		}
 	})
 
 	//	Keep the hero inside of the canvas
@@ -195,29 +184,7 @@ function render () {
 	display.drawText(`Puntaje: ${heroData.getScore()}`, (display.width - 150))
 
 	//	Hero lifes
-	display.drawLifes(heroData.getLife())
-
-	//	If the badass are eliminated, restart the badass array
-	/*if (badass.length === 0) {
-		window.cancelAnimationFrame(animation)
-		setTimeout(function () {
-			window.cancelAnimationFrame(animation)
-			animation = null
-			//console.log('Dentro de settimeout')
-			//heroData.addLevel()
-			//init()
-			if (animation === null) {
-				console.log('Es nulo :D')
-				console.log(animation)
-				//heroData.addLevel()
-				//init()
-			}
-			return
-		}, 1000)
-		window.cancelAnimationFrame(animation)
-		//init()
-		return
-	}*/
+	//display.drawLifes(heroData.getLife())
 
 	//	Draw badass
 	badass.some(function (element, index, arr) {
@@ -249,10 +216,16 @@ function infinityLoop () {
 
 				clearInterval(interval)
 			}
+
+			if (heroData.isGameOver()) {
+				window.cancelAnimationFrame(animation)
+				clearInterval(interval)
+				display.gameOver(heroData.getScore(), heroData.getLevel())
+			}
 		} catch (exception) {
 
 		}
-	}, 1000)
+	}, 500)
 }
 
 document.addEventListener('DOMContentLoaded', function () {

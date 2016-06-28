@@ -102,7 +102,16 @@ Screen.prototype.centerText = function(text, score, level) {
 	let context = this.ctx
 
 	context.font = "28px arial"
-  	context.fillText(`${text}`, 200, 200)
+  	//context.fillText(`${text}`, 200, 200)
   	context.fillText(`${score}`, 200, 300)
   	context.fillText(`${level}`, 200, 400)
+};
+
+Screen.prototype.gameOver = function(score, level) {
+	let context = this.ctx
+
+	context.font = "28px arial"
+  	context.fillText(`Juego finalizado`, 200, 200)
+  	context.fillText(`Tú puntaje: ${score}`, 200, 300)
+  	context.fillText(`Tú nivel: ${level}`, 200, 400)
 };
