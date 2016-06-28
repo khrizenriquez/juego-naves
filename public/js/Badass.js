@@ -11,7 +11,7 @@ var Badass = function (level) {
 	this.w 			= 30
 	this.h 			= 30
 	this.level 		= level || 1
-	this.life 		= (this.level * 5)
+	this.life 		= (this.level * 50)
 }
 
 /**

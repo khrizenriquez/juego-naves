@@ -106,15 +106,24 @@ function update () {
 		for (var j = 0, len2 = badass.length; j < len2; j++) {
 			var a = badass[j];
 			if (new Handler().AABBIntersect(b.x, b.y, b.width, b.height, a.x, a.y, a.w, a.h)) {
-				badass.splice(j, 1);
-				j--;
-				len2--;
-				bullets.splice(i, 1);
-				i--;
-				len--;
-				//	Increase hero score
-				heroData.setScore(heroData.getScore() + 
-								(heroData.getLevel() * 5))
+				let remaining = (a.getLife() - heroData.getPower())
+				console.log(a.getLife())
+				console.log(heroData.getPower())
+				console.log(remaining)
+				if (remaining <= 0) {
+					badass.splice(j, 1)
+					j--
+					len2--
+					bullets.splice(i, 1)
+					i--
+					len--
+					//	Increase hero score
+					heroData.setScore(heroData.getScore() + 
+									(heroData.getLevel() * 5))
+				} else {
+					a.setLife(remaining)
+				}
+				
 				// increase the movement frequence of the badass
 				// when there are less of them
 				/*switch (len2) {
@@ -135,18 +144,22 @@ function update () {
 						break;
 					}
 				}*/
+
+				//break
 			}
 		}
 	})
 
 	// update the badass at the current movement frequence
+	let xMovement = new Handler().getRandom(20, 30), 
+		yMovement = new Handler().getRandom(0, 30)
 	if (frames % lvFrame === 0) {
 		//spFrame = (spFrame + 1) % 2;
 		let _max = 0, _min = display.width
 		// iterate through badass and update postition
 		for (var i = 0, len = badass.length; i < len; i++) {
 			var a = badass[i];
-			a.x += new Handler().getRandom(20, 30) * dir;
+			a.x += xMovement * dir;
 			// find min/max values of all badass for direction
 			// change test
 			_max = Math.max(_max, a.x + a.w);
@@ -157,8 +170,11 @@ function update () {
 			// mirror direction and update position
 			dir *= -1;
 			for (var i = 0, len = badass.length; i < len; i++) {
-				badass[i].x += new Handler().getRandom(20, 30) * dir;
-				badass[i].y += new Handler().getRandom(0, 30);
+				badass[i].x += xMovement * dir
+				badass[i].y += yMovement
+				if (badass[i].y >= (display.height - 50)) {
+					badass[i].y = 10
+				}
 			}
 		}
 	}
@@ -166,23 +182,25 @@ function update () {
 	// update the badass at the current movement frequence
 	if (frames % lvFrame === 0) {
 		//spFrame = (spFrame + 1) % 2;
-		let _max = 0, _min = display.width
+		let _max = 0, 
+			_min = display.width, 
+			_hMax = display.height
 		// iterate through badass and update postition
 		badass.some(function (element, index, arr) {
-			var a = element;
-			a.x += new Handler().getRandom(20, 30) * dir;
+			var a = element
+			a.x += xMovement * dir
 			// find min/max values of all badass for direction
 			// change test
-			_max = Math.max(_max, a.x + a.w);
-			_min = Math.min(_min, a.x);
+			_max = Math.max(_max, a.x + a.w)
+			_min = Math.min(_min, a.x)
 		})
 		// check if badass should move down and change direction
 		if (_max > display.width - 30 || _min < 30) {
 			// mirror direction and update position
-			dir *= -1;
+			dir *= -1
 			badass.some(function (ele, ind, ar) {
-				ele.x += new Handler().getRandom(20, 30) * dir;
-				ele.y += new Handler().getRandom(0, 30);
+				ele.x += xMovement * dir
+				ele.y += yMovement
 			})
 		}
 	}
@@ -246,8 +264,6 @@ function render () {
 function infinityLoop () {
 	let interval = setInterval(function () {
 		try	{
-			console.log('Ani:' + animation)
-			console.log('Malotes: ' + badass.length)
 			if (badass.length <= 0) {
 				window.cancelAnimationFrame(animation)
 
