@@ -6,9 +6,9 @@ var Badass = function (level) {
 	this.imgTransp 	= window.location.href + 'img/badass/Badass-up-transp.png'
 	this.x 			= new Handler().getRandom(20, 750)
 	this.y 			= new Handler().getRandom(10, 30)
+	this.level 		= level || 1
 	this.w 			= this.getSize(this.level)
 	this.h 			= this.getSize(this.level)
-	this.level 		= level || 1
 	this.life 		= (this.level * 50)
 }
 
