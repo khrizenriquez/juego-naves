@@ -4,9 +4,9 @@ Juego de naves espaciales utilizando html5 y [Vanilla JS](http://vanilla-js.com/
 
 Actualmente el juego tiene 9 niveles, los cuales cada fondo cambia dependiendo del nivel del jugador, cuando se destruyen rivales el jugador obtiene puntos. En un futuro próximo espero agregarle items a los rivales que se destruyen, como vidas o potenciadores para la energía del jugador.
 
-![Chris Enríquez - Juego naves espaciales](/content/images/2016/06/Screen-Shot-2016-06-29-at-11-34-01.png)
+![Chris Enríquez - Juego naves espaciales](http://khrizenriquez.com/content/images/2016/06/Screen-Shot-2016-06-29-at-11-34-01.png)
 
-![Chris Enríquez - Juego naves espaciales](/content/images/2016/06/Screen-Shot-2016-06-29-at-11-34-52.png)
+![Chris Enríquez - Juego naves espaciales](http://khrizenriquez.com/content/images/2016/06/Screen-Shot-2016-06-29-at-11-34-52.png)
 
 [Parte de la idea para hacer este programa](https://www.youtube.com/watch?v=IerQ5M9p4YY)
 
